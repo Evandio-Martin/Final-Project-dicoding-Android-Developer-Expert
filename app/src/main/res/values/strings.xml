@@ -10,7 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_map">Maps</string>
     <string name="menu_favorite_movies">Favorite Movies</string>
-    <string name="menu_favorite_tv_show">Favorite Tv Shows</string>
+    <string name="menu_favorite_tv_show">Favorite Tv Series</string>
 
     <string name="title_activity_detail_home">DetailHomeActivity</string>
     <string name="no_data">Empty data</string>

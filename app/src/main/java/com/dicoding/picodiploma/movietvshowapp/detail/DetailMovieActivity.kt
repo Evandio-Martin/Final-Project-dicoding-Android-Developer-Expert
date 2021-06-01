@@ -36,8 +36,10 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun showDetailTourism(detailMovie: MovieEntity?) {
         detailMovie?.let {
             detail.textTitle.text = detailMovie.title
-            detail.textVoteAverage.text = "${resources.getString(R.string.vote_average)} ${detailMovie.voteAverage}"
-            detail.textReleaseDate.text = "${resources.getString(R.string.release_date)} ${detailMovie.releaseDate}"
+            detail.textVoteAverage.text =
+                "${resources.getString(R.string.vote_average)} ${detailMovie.voteAverage}"
+            detail.textReleaseDate.text =
+                "${resources.getString(R.string.release_date)} ${detailMovie.releaseDate}"
             detail.textDescription.text = detailMovie.description
             val BASE_IMG = "https://image.tmdb.org/t/p/w500"
             Glide.with(this@DetailMovieActivity)

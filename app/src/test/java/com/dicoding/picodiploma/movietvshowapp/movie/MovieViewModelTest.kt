@@ -7,25 +7,25 @@ import androidx.paging.PagedList
 import com.dicoding.picodiploma.movietvshowapp.core.data.Resource
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
 import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieUseCase
-import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class MovieViewModelTest {
-    private lateinit var viewModel: MovieViewModel
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var catalogRepository: MovieUseCase
+    private lateinit var useCase: MovieUseCase
+
+    private val viewModel by lazy { MovieViewModel(useCase) }
 
     @Mock
     private lateinit var observerMovie: Observer<Resource<PagedList<MovieEntity>>>
@@ -35,7 +35,7 @@ class MovieViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = MovieViewModel(catalogRepository)
+        reset(useCase)
     }
 
     @Test
@@ -45,11 +45,11 @@ class MovieViewModelTest {
         val movie = MutableLiveData<Resource<PagedList<MovieEntity>>>()
         movie.value = dummyMovie
 
-        `when`(catalogRepository.getAllMovies()).thenReturn(movie)
+        `when`(useCase.getAllMovies()).thenReturn(movie)
         val movieEntity = viewModel.movie.value?.data
-        verify(catalogRepository).getAllMovies()
-        Assert.assertNotNull(movieEntity)
-        Assert.assertEquals(5, movieEntity?.size)
+        verify(useCase).getAllMovies()
+        assertNotNull(movieEntity)
+        assertEquals(5, movieEntity?.size)
 
         viewModel.movie.observeForever(observerMovie)
         verify(observerMovie).onChanged(dummyMovie)

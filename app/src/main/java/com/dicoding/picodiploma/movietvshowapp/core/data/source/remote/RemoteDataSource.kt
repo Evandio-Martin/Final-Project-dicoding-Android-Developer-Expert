@@ -14,17 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RemoteDataSource(private val apiService: ApiService) {
-
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(service: ApiService): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(service)
-            }
-    }
-
     fun getAllMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
         val resultData = MutableLiveData<ApiResponse<List<MovieResponse>>>()
 
@@ -37,7 +26,8 @@ class RemoteDataSource(private val apiService: ApiService) {
                 response: Response<ListMovieResponse>
             ) {
                 val dataArray = response.body()?.result
-                resultData.value = if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
+                resultData.value =
+                    if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
             }
 
             override fun onFailure(call: Call<ListMovieResponse>, t: Throwable) {
@@ -61,7 +51,8 @@ class RemoteDataSource(private val apiService: ApiService) {
                 response: Response<ListTvShowResponse>
             ) {
                 val dataArray = response.body()?.result
-                resultData.value = if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
+                resultData.value =
+                    if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
             }
 
             override fun onFailure(call: Call<ListTvShowResponse>, t: Throwable) {

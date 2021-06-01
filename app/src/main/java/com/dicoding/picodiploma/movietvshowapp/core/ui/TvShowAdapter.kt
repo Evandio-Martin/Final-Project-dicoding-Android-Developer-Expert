@@ -20,6 +20,7 @@ class TvShowAdapter : PagedListAdapter<TvShowEntity, TvShowAdapter.ListViewHolde
             override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
                 return oldItem.title == newItem.title
             }
+
             override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
                 return oldItem == newItem
             }
@@ -27,7 +28,9 @@ class TvShowAdapter : PagedListAdapter<TvShowEntity, TvShowAdapter.ListViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_tv_show, parent, false))
+        ListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_tv_show, parent, false)
+        )
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val tvShow = getItem(position)

@@ -34,7 +34,8 @@ class FavoriteTvShowFragment : Fragment() {
 
             favoriteTvShowViewModel.favoriteTvShow.observe(viewLifecycleOwner, { dataTvShow ->
                 tvShowAdapter.setData(dataTvShow)
-                binding.viewEmpty.root.visibility = if (dataTvShow.isNotEmpty()) View.GONE else View.VISIBLE
+                binding.viewEmpty.root.visibility =
+                    if (dataTvShow.isNotEmpty()) View.GONE else View.VISIBLE
             })
 
             with(binding.rvFavoriteTvShows) {

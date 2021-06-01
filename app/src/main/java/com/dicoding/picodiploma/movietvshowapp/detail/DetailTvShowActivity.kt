@@ -37,8 +37,10 @@ class DetailTvShowActivity : AppCompatActivity() {
     private fun showDetailTourism(detailTvShow: TvShowEntity?) {
         detailTvShow?.let {
             detail.textTitle.text = detailTvShow.title
-            detail.textVoteAverage.text = "${resources.getString(R.string.vote_average)} ${detailTvShow.voteAverage}"
-            detail.textReleaseDate.text = "${resources.getString(R.string.release_date)} ${detailTvShow.releaseDate}"
+            detail.textVoteAverage.text =
+                "${resources.getString(R.string.vote_average)} ${detailTvShow.voteAverage}"
+            detail.textReleaseDate.text =
+                "${resources.getString(R.string.release_date)} ${detailTvShow.releaseDate}"
             detail.textDescription.text = detailTvShow.description
             val BASE_IMG = "https://image.tmdb.org/t/p/w500"
             Glide.with(this@DetailTvShowActivity)

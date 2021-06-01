@@ -25,7 +25,9 @@ class FavoriteTvShowAdapter : RecyclerView.Adapter<FavoriteTvShowAdapter.ListVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_tv_show, parent, false))
+        ListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_tv_show, parent, false)
+        )
 
     override fun getItemCount() = listData.size
 
@@ -55,7 +57,7 @@ class FavoriteTvShowAdapter : RecyclerView.Adapter<FavoriteTvShowAdapter.ListVie
                 itemView.context.startActivity(intent)
             }
         }
-        
+
         init {
             binding.root.setOnClickListener {
                 onItemClick?.invoke(listData[adapterPosition])

@@ -23,27 +23,15 @@ object DataMapper {
         return movieList
     }
 
-    fun mapEntitiesToDomain(input: List<MovieEntity>): List<Model> =
-        input.map {
-            Model(
-                description = it.description,
-                title = it.title,
-                voteAverage = it.voteAverage,
-                releaseDate = it.releaseDate,
-                poster = it.poster,
-                isFavorite = it.isFavorite
-            )
-        }
-
     fun mapDomainToEntity(input: MovieEntity?) = input?.let {
         MovieEntity(
-        description = it.description,
-        title = input.title,
-        voteAverage = input.voteAverage,
-        releaseDate = input.releaseDate,
-        poster = input.poster,
-        isFavorite = input.isFavorite
-    )
+            description = it.description,
+            title = input.title,
+            voteAverage = input.voteAverage,
+            releaseDate = input.releaseDate,
+            poster = input.poster,
+            isFavorite = input.isFavorite
+        )
     }
 
     fun mapTvResponsesToEntities(input: List<TvShowResponse>): List<TvShowEntity> {
@@ -61,18 +49,6 @@ object DataMapper {
         }
         return movieList
     }
-
-    fun mapTvEntitiesToDomain(input: List<TvShowEntity>): List<Model> =
-        input.map {
-            Model(
-                description = it.description,
-                title = it.title,
-                voteAverage = it.voteAverage,
-                releaseDate = it.releaseDate,
-                poster = it.poster,
-                isFavorite = it.isFavorite
-            )
-        }
 
     fun mapTvDomainToEntity(input: TvShowEntity) = TvShowEntity(
         description = input.description,

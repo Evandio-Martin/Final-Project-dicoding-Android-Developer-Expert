@@ -46,7 +46,8 @@ class TvShowFragment : Fragment() {
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
-                            binding.viewError.tvError.text = tvShow.message ?: getString(R.string.something_wrong)
+                            binding.viewError.tvError.text =
+                                tvShow.message ?: getString(R.string.something_wrong)
                         }
                     }
                 }

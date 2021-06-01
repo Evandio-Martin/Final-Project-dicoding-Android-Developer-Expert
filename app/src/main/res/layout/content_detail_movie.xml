@@ -30,8 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/poster"
         app:layout_constraintTop_toTopOf="@+id/poster"
-        tools:text="@string/title"
-        android:layout_marginLeft="8dp" />
+        tools:text="@string/title" />
 
     <TextView
         android:id="@+id/text_vote_average"

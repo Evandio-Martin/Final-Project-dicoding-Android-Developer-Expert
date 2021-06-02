@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.dicoding.picodiploma.movietvshowapp.R
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.TvShowEntity
+import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.databinding.ActivityDetailTvShowBinding
 import com.dicoding.picodiploma.movietvshowapp.databinding.ContentDetailTvShowBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,18 +23,17 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val detailBinding = ActivityDetailTvShowBinding.inflate(layoutInflater)
         detail = detailBinding.detailContent
 
         setContentView(detailBinding.root)
 
-        val detailTourism = intent.getParcelableExtra<TvShowEntity>(EXTRA_DATA)
+        val detailTourism = intent.getParcelableExtra<Model>(EXTRA_DATA)
         showDetailTourism(detailTourism)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun showDetailTourism(detailTvShow: TvShowEntity?) {
+    private fun showDetailTourism(detailTvShow: Model?) {
         detailTvShow?.let {
             detail.textTitle.text = detailTvShow.title
             detail.textVoteAverage.text =

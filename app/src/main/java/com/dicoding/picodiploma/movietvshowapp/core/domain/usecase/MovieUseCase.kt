@@ -1,17 +1,15 @@
 package com.dicoding.picodiploma.movietvshowapp.core.domain.usecase
 
-import androidx.lifecycle.LiveData
-import androidx.paging.PagedList
 import com.dicoding.picodiploma.movietvshowapp.core.data.Resource
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.TvShowEntity
+import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
+import kotlinx.coroutines.flow.Flow
 
 interface MovieUseCase {
-    fun getAllMovies(): LiveData<Resource<PagedList<MovieEntity>>>
-    fun getFavoriteMovies(): LiveData<PagedList<MovieEntity>>
-    fun setFavoriteMovies(model: MovieEntity, state: Boolean)
+    fun getAllMovies(): Flow<Resource<List<Model>>>
+    fun getFavoriteMovies(): Flow<List<Model>>
+    fun setFavoriteMovies(model: Model, state: Boolean)
 
-    fun getAllTvShows(): LiveData<Resource<PagedList<TvShowEntity>>>
-    fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>>
-    fun setFavoriteTvShows(model: TvShowEntity, state: Boolean)
+    fun getAllTvShows(): Flow<Resource<List<Model>>>
+    fun getFavoriteTvShows(): Flow<List<Model>>
+    fun setFavoriteTvShows(model: Model, state: Boolean)
 }

@@ -1,64 +1,54 @@
 package com.dicoding.picodiploma.movietvshowapp.core.ui
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dicoding.picodiploma.movietvshowapp.detail.DetailMovieActivity
 import com.dicoding.picodiploma.movietvshowapp.R
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
+import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.databinding.ItemListMovieBinding
+import java.util.*
 
-class MovieAdapter : PagedListAdapter<MovieEntity, MovieAdapter.ListViewHolder>(DIFF_CALLBACK) {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
 
-    companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
-            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
-                return oldItem.title == newItem.title
-            }
+    private var listData = ArrayList<Model>()
+    var onItemClick: ((Model) -> Unit)? = null
 
-            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
-                return oldItem.title == newItem.title
-            }
-        }
+    fun setData(newListData: List<Model>?) {
+        if (newListData == null) return
+        listData.clear()
+        listData.addAll(newListData)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_list_movie, parent, false)
-        )
+        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_movie, parent, false))
+
+    override fun getItemCount() = listData.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val movie = getItem(position)
-        if (movie != null) {
-            holder.bind(movie)
-        }
+        val data = listData[position]
+        holder.bind(data)
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListMovieBinding.bind(itemView)
         val BASE_IMG = "https://image.tmdb.org/t/p/w500"
-        fun bind(data: MovieEntity) {
+        fun bind(data: Model) {
             with(binding) {
-                if (data != null) {
-                    tvItemTitle.text = data.title
-                    tvReleaseDate.text = data.releaseDate
-                    tvVoteAverage.text = data.voteAverage.toString()
-                    Glide.with(itemView.context)
-                        .load(BASE_IMG + data.poster)
-                        .into(poster)
-                }
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-                    if (data != null) {
-                        intent.putExtra(DetailMovieActivity.EXTRA_DATA, data)
-                    }
-                    itemView.context.startActivity(intent)
-                }
+                tvItemTitle.text = data.title
+                tvReleaseDate.text = data.releaseDate
+                tvVoteAverage.text = data.voteAverage.toString()
+                Glide.with(itemView.context)
+                    .load(BASE_IMG + data.poster)
+                    .into(poster)
+            }
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(listData[adapterPosition])
             }
         }
     }

@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Model(
+data class Model(
     var title: String,
     var poster: String,
     var voteAverage: Double,

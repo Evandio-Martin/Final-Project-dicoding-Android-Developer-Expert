@@ -1,28 +1,28 @@
 package com.dicoding.picodiploma.movietvshowapp.core.data.source.local
 
-import androidx.paging.DataSource
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.TvShowEntity
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.room.MovieDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val movieDao: MovieDao) {
 
-    fun getAllMovies(): DataSource.Factory<Int, MovieEntity> = movieDao.getAllMovies()
+    fun getAllMovies(): Flow<List<MovieEntity>> = movieDao.getAllMovies()
 
-    fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity> = movieDao.getFavoriteMovies()
+    fun getFavoriteMovies(): Flow<List<MovieEntity>> = movieDao.getFavoriteMovies()
 
-    fun insertMovies(movieList: List<MovieEntity>) = movieDao.insertMovies(movieList)
+    suspend fun insertMovies(movieList: List<MovieEntity>) = movieDao.insertMovies(movieList)
 
     fun setFavoriteMovies(movie: MovieEntity, newState: Boolean) {
         movie.isFavorite = newState
         movieDao.updateFavoriteMovies(movie)
     }
 
-    fun getAllTvShows(): DataSource.Factory<Int, TvShowEntity> = movieDao.getAllTvShows()
+    fun getAllTvShows(): Flow<List<TvShowEntity>> = movieDao.getAllTvShows()
 
-    fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity> = movieDao.getFavoriteTvShows()
+    fun getFavoriteTvShows(): Flow<List<TvShowEntity>> = movieDao.getFavoriteTvShows()
 
-    fun insertTvShows(tvShowList: List<TvShowEntity>) = movieDao.insertTvShows(tvShowList)
+    suspend fun insertTvShows(tvShowList: List<TvShowEntity>) = movieDao.insertTvShows(tvShowList)
 
     fun setFavoriteTvShow(tvShow: TvShowEntity, newState: Boolean) {
         tvShow.isFavorite = newState

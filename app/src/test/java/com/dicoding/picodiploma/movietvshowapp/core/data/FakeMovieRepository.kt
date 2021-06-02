@@ -10,6 +10,7 @@ import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.RemoteDat
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.network.ApiResponse
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response.MovieResponse
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response.TvShowResponse
+import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.core.domain.repository.IMovieRepository
 import com.dicoding.picodiploma.movietvshowapp.core.utils.AppExecutors
 import com.dicoding.picodiploma.movietvshowapp.core.utils.DataMapper
@@ -52,7 +53,7 @@ class FakeMovieRepository(
         return LivePagedListBuilder(localDataSource.getFavoriteMovies(), config).build()
     }
 
-    override fun setFavoriteMovies(movie: MovieEntity, state: Boolean) {
+    override fun setFavoriteMovies(movie: Model, state: Boolean) {
     }
 
     override fun getAllTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> =
@@ -87,7 +88,7 @@ class FakeMovieRepository(
         return LivePagedListBuilder(localDataSource.getFavoriteTvShows(), config).build()
     }
 
-    override fun setFavoriteTvShows(movie: TvShowEntity, state: Boolean) {
+    override fun setFavoriteTvShows(movie: Model, state: Boolean) {
     }
 }
 

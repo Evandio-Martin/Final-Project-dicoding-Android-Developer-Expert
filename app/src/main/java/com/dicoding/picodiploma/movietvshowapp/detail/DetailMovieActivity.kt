@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.dicoding.picodiploma.movietvshowapp.R
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
+import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.databinding.ActivityDetailMovieBinding
 import com.dicoding.picodiploma.movietvshowapp.databinding.ContentDetailMovieBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,18 +22,17 @@ class DetailMovieActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val detailBinding = ActivityDetailMovieBinding.inflate(layoutInflater)
         detail = detailBinding.detailContent
 
         setContentView(detailBinding.root)
 
-        val detailTourism = intent.getParcelableExtra<MovieEntity>(EXTRA_DATA)
+        val detailTourism = intent.getParcelableExtra<Model>(EXTRA_DATA)
         showDetailTourism(detailTourism)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun showDetailTourism(detailMovie: MovieEntity?) {
+    private fun showDetailTourism(detailMovie: Model?) {
         detailMovie?.let {
             detail.textTitle.text = detailMovie.title
             detail.textVoteAverage.text =

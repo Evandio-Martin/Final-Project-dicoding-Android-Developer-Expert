@@ -1,13 +1,15 @@
 package com.dicoding.picodiploma.movietvshowapp.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.picodiploma.movietvshowapp.core.ui.FavoriteTvShowAdapter
+import com.dicoding.picodiploma.movietvshowapp.core.ui.MovieAdapter
 import com.dicoding.picodiploma.movietvshowapp.databinding.FragmentFavoriteTvShowBinding
+import com.dicoding.picodiploma.movietvshowapp.detail.DetailMovieActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteTvShowFragment : Fragment() {
@@ -30,7 +32,12 @@ class FavoriteTvShowFragment : Fragment() {
 
         if (activity != null) {
 
-            val tvShowAdapter = FavoriteTvShowAdapter()
+            val tvShowAdapter = MovieAdapter()
+            tvShowAdapter.onItemClick = { selectedData ->
+                val intent = Intent(activity, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
+                startActivity(intent)
+            }
 
             favoriteTvShowViewModel.favoriteTvShow.observe(viewLifecycleOwner, { dataTvShow ->
                 tvShowAdapter.setData(dataTvShow)

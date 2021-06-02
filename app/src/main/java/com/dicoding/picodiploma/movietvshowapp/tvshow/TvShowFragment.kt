@@ -1,5 +1,6 @@
 package com.dicoding.picodiploma.movietvshowapp.tvshow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.picodiploma.movietvshowapp.R
 import com.dicoding.picodiploma.movietvshowapp.core.data.Resource
-import com.dicoding.picodiploma.movietvshowapp.core.ui.TvShowAdapter
+import com.dicoding.picodiploma.movietvshowapp.core.ui.MovieAdapter
 import com.dicoding.picodiploma.movietvshowapp.databinding.FragmentTvShowBinding
+import com.dicoding.picodiploma.movietvshowapp.detail.DetailTvShowActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -33,7 +35,12 @@ class TvShowFragment : Fragment() {
 
         if (activity != null) {
 
-            val tvShowAdapter = TvShowAdapter()
+            val tvShowAdapter = MovieAdapter()
+            tvShowAdapter.onItemClick = { selectedData ->
+                val intent = Intent(activity, DetailTvShowActivity::class.java)
+                intent.putExtra(DetailTvShowActivity.EXTRA_DATA, selectedData)
+                startActivity(intent)
+            }
 
             tvShowViewModel.tvShow.observe(viewLifecycleOwner, { tvShow ->
                 if (tvShow != null) {
@@ -41,7 +48,7 @@ class TvShowFragment : Fragment() {
                         is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
-                            tvShowAdapter.submitList(tvShow.data)
+                            tvShowAdapter.setData(tvShow.data)
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE

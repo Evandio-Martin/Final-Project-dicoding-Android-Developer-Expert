@@ -1,5 +1,6 @@
 package com.dicoding.picodiploma.movietvshowapp.movie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,8 @@ import com.dicoding.picodiploma.movietvshowapp.R
 import com.dicoding.picodiploma.movietvshowapp.core.data.Resource
 import com.dicoding.picodiploma.movietvshowapp.core.ui.MovieAdapter
 import com.dicoding.picodiploma.movietvshowapp.databinding.FragmentMovieBinding
+import com.dicoding.picodiploma.movietvshowapp.detail.DetailMovieActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class MovieFragment : Fragment() {
 
@@ -34,6 +35,11 @@ class MovieFragment : Fragment() {
         if (activity != null) {
 
             val movieAdapter = MovieAdapter()
+            movieAdapter.onItemClick = { selectedData ->
+                val intent = Intent(activity, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
+                startActivity(intent)
+            }
 
             movieViewModel.movie.observe(viewLifecycleOwner, { movie ->
                 if (movie != null) {
@@ -41,7 +47,7 @@ class MovieFragment : Fragment() {
                         is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
-                            movieAdapter.submitList(movie.data)
+                            movieAdapter.setData(movie.data)
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE

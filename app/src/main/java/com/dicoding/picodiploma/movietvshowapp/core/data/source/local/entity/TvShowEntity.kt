@@ -1,14 +1,11 @@
 package com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity
 
-import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "tb_favorite_tvshow")
-@Parcelize
 data class TvShowEntity(
     @PrimaryKey
     @NonNull
@@ -29,4 +26,4 @@ data class TvShowEntity(
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
-) : Parcelable
+)

@@ -1,18 +1,16 @@
 package com.dicoding.picodiploma.movietvshowapp.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.LocalDataSource
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.TvShowEntity
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.RemoteDataSource
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.network.ApiResponse
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response.MovieResponse
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response.TvShowResponse
+import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.core.domain.repository.IMovieRepository
 import com.dicoding.picodiploma.movietvshowapp.core.utils.AppExecutors
 import com.dicoding.picodiploma.movietvshowapp.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class MovieRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -20,81 +18,67 @@ class MovieRepository(
     private val appExecutors: AppExecutors
 ) : IMovieRepository {
 
-    override fun getAllMovies(): LiveData<Resource<PagedList<MovieEntity>>> =
-        object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
-                val config = PagedList.Config.Builder()
-                    .setEnablePlaceholders(false)
-                    .setInitialLoadSizeHint(4)
-                    .setPageSize(4)
-                    .build()
-                return LivePagedListBuilder(localDataSource.getAllMovies(), config).build()
+    override fun getAllMovies(): Flow<Resource<List<Model>>> =
+        object : NetworkBoundResource<List<Model>, List<MovieResponse>>() {
+            override fun loadFromDB(): Flow<List<Model>> {
+                return localDataSource.getAllMovies().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
             }
 
-            override fun shouldFetch(data: PagedList<MovieEntity>): Boolean =
-                data == null || data.isEmpty()
+            override fun shouldFetch(data: List<Model>?): Boolean =
+//                data == null || data.isEmpty()
+                true // ganti dengan true jika ingin selalu mengambil data dari internet
 
-            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
                 remoteDataSource.getAllMovies()
 
-            override fun saveCallResult(data: List<MovieResponse>) {
-                val tourismList = DataMapper.mapResponsesToEntities(data)
-                localDataSource.insertMovies(tourismList)
+            override suspend fun saveCallResult(data: List<MovieResponse>) {
+                val movieList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertMovies(movieList)
             }
-        }.asLiveData()
+        }.asFlow()
 
-    override fun getFavoriteMovies(): LiveData<PagedList<MovieEntity>> {
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(4)
-            .setPageSize(4)
-            .build()
-        return LivePagedListBuilder(localDataSource.getFavoriteMovies(), config).build()
-    }
-
-    override fun setFavoriteMovies(movie: MovieEntity, state: Boolean) {
-        val movieEntity = DataMapper.mapDomainToEntity(movie)
-        appExecutors.diskIO().execute {
-            if (movieEntity != null) {
-                localDataSource.setFavoriteMovies(movieEntity, state)
-            }
+    override fun getFavoriteMovies(): Flow<List<Model>> {
+        return localDataSource.getFavoriteMovies().map {
+            DataMapper.mapEntitiesToDomain(it)
         }
     }
 
-    override fun getAllTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> =
-        object : NetworkBoundResource<PagedList<TvShowEntity>, List<TvShowResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
-                val config = PagedList.Config.Builder()
-                    .setEnablePlaceholders(false)
-                    .setInitialLoadSizeHint(4)
-                    .setPageSize(4)
-                    .build()
-                return LivePagedListBuilder(localDataSource.getAllTvShows(), config).build()
-            }
-
-            override fun shouldFetch(data: PagedList<TvShowEntity>): Boolean =
-                data == null || data.isEmpty()
-
-            override fun createCall(): LiveData<ApiResponse<List<TvShowResponse>>> =
-                remoteDataSource.getAllTvShows()
-
-            override fun saveCallResult(data: List<TvShowResponse>) {
-                val tourismList = DataMapper.mapTvResponsesToEntities(data)
-                localDataSource.insertTvShows(tourismList)
-            }
-        }.asLiveData()
-
-    override fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>> {
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(4)
-            .setPageSize(4)
-            .build()
-        return LivePagedListBuilder(localDataSource.getFavoriteTvShows(), config).build()
+    override fun setFavoriteMovies(movie: Model, state: Boolean) {
+        val movieEntity = DataMapper.mapDomainToEntity(movie)
+        appExecutors.diskIO().execute { localDataSource.setFavoriteMovies(movieEntity, state) }
     }
 
-    override fun setFavoriteTvShows(movie: TvShowEntity, state: Boolean) {
-        val tvShowEntity = DataMapper.mapTvDomainToEntity(movie)
+    override fun getAllTvShows(): Flow<Resource<List<Model>>> =
+        object : NetworkBoundResource<List<Model>, List<TvShowResponse>>() {
+            override fun loadFromDB(): Flow<List<Model>> {
+                return localDataSource.getAllTvShows().map {
+                    DataMapper.mapTvEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<Model>?): Boolean =
+//                data == null || data.isEmpty()
+                true // ganti dengan true jika ingin selalu mengambil data dari internet
+
+            override suspend fun createCall(): Flow<ApiResponse<List<TvShowResponse>>> =
+                remoteDataSource.getAllTvShows()
+
+            override suspend fun saveCallResult(data: List<TvShowResponse>) {
+                val tvShowList = DataMapper.mapTvResponsesToEntities(data)
+                localDataSource.insertTvShows(tvShowList)
+            }
+        }.asFlow()
+
+    override fun getFavoriteTvShows(): Flow<List<Model>> {
+        return localDataSource.getFavoriteTvShows().map {
+            DataMapper.mapTvEntitiesToDomain(it)
+        }
+    }
+
+    override fun setFavoriteTvShows(tvShow: Model, state: Boolean) {
+        val tvShowEntity = DataMapper.mapTvDomainToEntity(tvShow)
         appExecutors.diskIO().execute { localDataSource.setFavoriteTvShow(tvShowEntity, state) }
     }
 }

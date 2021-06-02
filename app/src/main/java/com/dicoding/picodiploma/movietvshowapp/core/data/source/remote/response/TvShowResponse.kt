@@ -3,19 +3,19 @@ package com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class TvShowResponse(
-    @SerializedName("name")
+    @field:SerializedName("name")
     val title: String,
 
-    @SerializedName("poster_path")
+    @field:SerializedName("poster_path")
     val poster: String,
 
-    @SerializedName("vote_average")
+    @field:SerializedName("vote_average")
     val voteAverage: Double,
 
-    @SerializedName("first_air_date")
+    @field:SerializedName("first_air_date")
     val releaseDate: String,
 
-    @SerializedName("overview")
+    @field:SerializedName("overview")
     val description: String
 )
 

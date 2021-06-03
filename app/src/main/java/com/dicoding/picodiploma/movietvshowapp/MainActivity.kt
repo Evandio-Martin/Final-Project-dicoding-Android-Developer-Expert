@@ -1,4 +1,4 @@
-package com.dicoding.movietvshowapp
+package com.dicoding.picodiploma.movietvshowapp
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,7 +6,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import com.dicoding.picodiploma.movietvshowapp.R
 import com.dicoding.picodiploma.movietvshowapp.databinding.ActivityMainBinding
 import com.dicoding.picodiploma.movietvshowapp.favorite.FavoriteMovieFragment
 import com.dicoding.picodiploma.movietvshowapp.favorite.FavoriteTvShowFragment

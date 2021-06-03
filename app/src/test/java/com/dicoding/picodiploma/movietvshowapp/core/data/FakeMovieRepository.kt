@@ -3,10 +3,10 @@ package com.dicoding.picodiploma.movietvshowapp.core.data
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.LocalDataSource
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.TvShowEntity
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.RemoteDataSource
+import com.dicoding.picodiploma.movietshowapp.core.data.source.local.LocalDataSource
+import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity
+import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity
+import com.dicoding.picodiploma.movietshowapp.core.data.source.remote.RemoteDataSource
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.network.ApiResponse
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response.MovieResponse
 import com.dicoding.picodiploma.movietvshowapp.core.data.source.remote.response.TvShowResponse
@@ -16,14 +16,14 @@ import com.dicoding.picodiploma.movietvshowapp.core.utils.AppExecutors
 import com.dicoding.picodiploma.movietvshowapp.core.utils.DataMapper
 
 class FakeMovieRepository(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: com.dicoding.picodiploma.movietshowapp.core.data.source.remote.RemoteDataSource,
+    private val localDataSource: com.dicoding.picodiploma.movietshowapp.core.data.source.local.LocalDataSource,
     private val appExecutors: AppExecutors?
 ) : IMovieRepository {
 
-    override fun getAllMovies(): LiveData<Resource<PagedList<MovieEntity>>> =
-        object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
+    override fun getAllMovies(): LiveData<com.dicoding.picodiploma.movietshowapp.core.data.Resource<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>>> =
+        object : com.dicoding.picodiploma.movietshowapp.core.data.NetworkBoundResource<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>, List<MovieResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
                     .setInitialLoadSizeHint(4)
@@ -32,7 +32,7 @@ class FakeMovieRepository(
                 return LivePagedListBuilder(localDataSource.getAllMovies(), config).build()
             }
 
-            override fun shouldFetch(data: PagedList<MovieEntity>): Boolean =
+            override fun shouldFetch(data: PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>): Boolean =
                 data == null || data.isEmpty()
 
             override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
@@ -44,7 +44,7 @@ class FakeMovieRepository(
             }
         }.asLiveData()
 
-    override fun getFavoriteMovies(): LiveData<PagedList<MovieEntity>> {
+    override fun getFavoriteMovies(): LiveData<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>> {
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(4)
@@ -56,9 +56,9 @@ class FakeMovieRepository(
     override fun setFavoriteMovies(movie: Model, state: Boolean) {
     }
 
-    override fun getAllTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> =
-        object : NetworkBoundResource<PagedList<TvShowEntity>, List<TvShowResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
+    override fun getAllTvShows(): LiveData<com.dicoding.picodiploma.movietshowapp.core.data.Resource<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>>> =
+        object : com.dicoding.picodiploma.movietshowapp.core.data.NetworkBoundResource<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>, List<TvShowResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
                     .setInitialLoadSizeHint(4)
@@ -67,7 +67,7 @@ class FakeMovieRepository(
                 return LivePagedListBuilder(localDataSource.getAllTvShows(), config).build()
             }
 
-            override fun shouldFetch(data: PagedList<TvShowEntity>): Boolean =
+            override fun shouldFetch(data: PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>): Boolean =
                 data == null || data.isEmpty()
 
             override fun createCall(): LiveData<ApiResponse<List<TvShowResponse>>> =
@@ -79,7 +79,7 @@ class FakeMovieRepository(
             }
         }.asLiveData()
 
-    override fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>> {
+    override fun getFavoriteTvShows(): LiveData<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>> {
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(4)

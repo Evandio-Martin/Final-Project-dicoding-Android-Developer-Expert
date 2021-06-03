@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.picodiploma.movietvshowapp.core.ui.MovieAdapter
+import com.dicoding.picodiploma.movietshowapp.core.ui.MovieAdapter
 import com.dicoding.picodiploma.movietvshowapp.databinding.FragmentFavoriteTvShowBinding
-import com.dicoding.picodiploma.movietvshowapp.detail.DetailMovieActivity
+import com.dicoding.picodiploma.movietvshowapp.detail.DetailTvShowActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteTvShowFragment : Fragment() {
@@ -34,8 +34,8 @@ class FavoriteTvShowFragment : Fragment() {
 
             val tvShowAdapter = MovieAdapter()
             tvShowAdapter.onItemClick = { selectedData ->
-                val intent = Intent(activity, DetailMovieActivity::class.java)
-                intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
+                val intent = Intent(activity, DetailTvShowActivity::class.java)
+                intent.putExtra(DetailTvShowActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
 

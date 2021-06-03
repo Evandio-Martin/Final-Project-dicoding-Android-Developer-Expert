@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.dicoding.picodiploma.movietshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.R
-import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.databinding.ActivityDetailMovieBinding
 import com.dicoding.picodiploma.movietvshowapp.databinding.ContentDetailMovieBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,9 +40,9 @@ class DetailMovieActivity : AppCompatActivity() {
             detail.textReleaseDate.text =
                 "${resources.getString(R.string.release_date)} ${detailMovie.releaseDate}"
             detail.textDescription.text = detailMovie.description
-            val BASE_IMG = "https://image.tmdb.org/t/p/w500"
+            val baseImg = "https://image.tmdb.org/t/p/w500"
             Glide.with(this@DetailMovieActivity)
-                .load(BASE_IMG + detailMovie.poster)
+                .load(baseImg + detailMovie.poster)
                 .into(detail.poster)
 
             var statusFavorite = detailMovie.isFavorite

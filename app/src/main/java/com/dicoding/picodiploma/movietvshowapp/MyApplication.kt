@@ -1,9 +1,9 @@
 package com.dicoding.picodiploma.movietvshowapp
 
 import android.app.Application
-import com.dicoding.picodiploma.movietvshowapp.core.di.databaseModule
-import com.dicoding.picodiploma.movietvshowapp.core.di.networkModule
-import com.dicoding.picodiploma.movietvshowapp.core.di.repositoryModule
+import com.dicoding.picodiploma.movietshowapp.core.di.databaseModule
+import com.dicoding.picodiploma.movietshowapp.core.di.networkModule
+import com.dicoding.picodiploma.movietshowapp.core.di.repositoryModule
 import com.dicoding.picodiploma.movietvshowapp.di.useCaseModule
 import com.dicoding.picodiploma.movietvshowapp.di.viewModelModule
 import org.koin.android.ext.koin.androidContext

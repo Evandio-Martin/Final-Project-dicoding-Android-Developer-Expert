@@ -5,12 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.dicoding.picodiploma.movietshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.R
-import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
 import com.dicoding.picodiploma.movietvshowapp.databinding.ActivityDetailTvShowBinding
 import com.dicoding.picodiploma.movietvshowapp.databinding.ContentDetailTvShowBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class DetailTvShowActivity : AppCompatActivity() {
 
@@ -41,9 +40,9 @@ class DetailTvShowActivity : AppCompatActivity() {
             detail.textReleaseDate.text =
                 "${resources.getString(R.string.release_date)} ${detailTvShow.releaseDate}"
             detail.textDescription.text = detailTvShow.description
-            val BASE_IMG = "https://image.tmdb.org/t/p/w500"
+            val baseImg = "https://image.tmdb.org/t/p/w500"
             Glide.with(this@DetailTvShowActivity)
-                .load(BASE_IMG + detailTvShow.poster)
+                .load(baseImg + detailTvShow.poster)
                 .into(detail.poster)
 
             var statusFavorite = detailTvShow.isFavorite

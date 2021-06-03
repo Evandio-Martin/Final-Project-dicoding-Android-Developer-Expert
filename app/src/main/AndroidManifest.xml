@@ -14,7 +14,7 @@
         android:theme="@style/Theme.TourismApp">
 
         <activity
-            android:name="com.dicoding.movietvshowapp.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/Theme.TourismApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

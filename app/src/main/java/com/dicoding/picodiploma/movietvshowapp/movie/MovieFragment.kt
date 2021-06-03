@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.picodiploma.movietshowapp.core.data.Resource
+import com.dicoding.picodiploma.movietshowapp.core.ui.MovieAdapter
 import com.dicoding.picodiploma.movietvshowapp.R
-import com.dicoding.picodiploma.movietvshowapp.core.data.Resource
-import com.dicoding.picodiploma.movietvshowapp.core.ui.MovieAdapter
 import com.dicoding.picodiploma.movietvshowapp.databinding.FragmentMovieBinding
 import com.dicoding.picodiploma.movietvshowapp.detail.DetailMovieActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel

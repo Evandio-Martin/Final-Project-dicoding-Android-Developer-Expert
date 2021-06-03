@@ -1,7 +1,7 @@
 package com.dicoding.picodiploma.movietvshowapp.di
 
-import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieInteractor
-import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieUseCase
+import com.dicoding.picodiploma.movietshowapp.core.domain.usecase.MovieInteractor
+import com.dicoding.picodiploma.movietshowapp.core.domain.usecase.MovieUseCase
 import com.dicoding.picodiploma.movietvshowapp.detail.DetailViewModel
 import com.dicoding.picodiploma.movietvshowapp.favorite.FavoriteViewModel
 import com.dicoding.picodiploma.movietvshowapp.movie.MovieViewModel

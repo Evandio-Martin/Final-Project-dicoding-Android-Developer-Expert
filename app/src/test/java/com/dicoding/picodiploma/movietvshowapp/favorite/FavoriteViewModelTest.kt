@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.TvShowEntity
+import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity
+import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity
 import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -29,16 +29,16 @@ class FavoriteViewModelTest {
     private val viewModel by lazy { FavoriteViewModel(useCase) }
 
     @Mock
-    private lateinit var observerMovie: Observer<PagedList<MovieEntity>>
+    private lateinit var observerMovie: Observer<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>>
 
     @Mock
-    private lateinit var observerTvShow: Observer<PagedList<TvShowEntity>>
+    private lateinit var observerTvShow: Observer<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>>
 
     @Mock
-    private lateinit var moviePagedList: PagedList<MovieEntity>
+    private lateinit var moviePagedList: PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>
 
     @Mock
-    private lateinit var tvShowPagedList: PagedList<TvShowEntity>
+    private lateinit var tvShowPagedList: PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>
 
     @Before
     fun setUp() {
@@ -49,7 +49,7 @@ class FavoriteViewModelTest {
     fun getFavoriteMovie() {
         val dummyMovie = moviePagedList
         Mockito.`when`(dummyMovie.size).thenReturn(5)
-        val movie = MutableLiveData<PagedList<MovieEntity>>()
+        val movie = MutableLiveData<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>>()
         movie.value = dummyMovie
 
         Mockito.`when`(useCase.getFavoriteMovies()).thenReturn(movie)
@@ -66,7 +66,7 @@ class FavoriteViewModelTest {
     fun getFavoriteTvShow() {
         val dummyTvShow = tvShowPagedList
         Mockito.`when`(dummyTvShow.size).thenReturn(5)
-        val tvShow = MutableLiveData<PagedList<TvShowEntity>>()
+        val tvShow = MutableLiveData<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity>>()
         tvShow.value = dummyTvShow
 
         Mockito.`when`(useCase.getFavoriteTvShows()).thenReturn(tvShow)

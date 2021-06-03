@@ -1,8 +1,8 @@
 package com.dicoding.picodiploma.movietvshowapp.detail
 
 import androidx.lifecycle.ViewModel
-import com.dicoding.picodiploma.movietvshowapp.core.domain.model.Model
-import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieUseCase
+import com.dicoding.picodiploma.movietshowapp.core.domain.model.Model
+import com.dicoding.picodiploma.movietshowapp.core.domain.usecase.MovieUseCase
 
 class DetailViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
     fun setFavoriteMovie(model: Model, newStatus: Boolean) =

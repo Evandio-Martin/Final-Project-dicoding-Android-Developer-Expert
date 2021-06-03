@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.dicoding.picodiploma.movietvshowapp.core.data.Resource
-import com.dicoding.picodiploma.movietvshowapp.core.data.source.local.entity.MovieEntity
+import com.dicoding.picodiploma.movietshowapp.core.data.Resource
+import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity
 import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -28,10 +28,10 @@ class MovieViewModelTest {
     private val viewModel by lazy { MovieViewModel(useCase) }
 
     @Mock
-    private lateinit var observerMovie: Observer<Resource<PagedList<MovieEntity>>>
+    private lateinit var observerMovie: Observer<com.dicoding.picodiploma.movietshowapp.core.data.Resource<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>>>
 
     @Mock
-    private lateinit var pagedList: PagedList<MovieEntity>
+    private lateinit var pagedList: PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>
 
     @Before
     fun setUp() {
@@ -40,9 +40,9 @@ class MovieViewModelTest {
 
     @Test
     fun getMovie() {
-        val dummyMovie = Resource.Success(pagedList)
+        val dummyMovie = com.dicoding.picodiploma.movietshowapp.core.data.Resource.Success(pagedList)
         `when`(dummyMovie.data?.size).thenReturn(5)
-        val movie = MutableLiveData<Resource<PagedList<MovieEntity>>>()
+        val movie = MutableLiveData<com.dicoding.picodiploma.movietshowapp.core.data.Resource<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>>>()
         movie.value = dummyMovie
 
         `when`(useCase.getAllMovies()).thenReturn(movie)

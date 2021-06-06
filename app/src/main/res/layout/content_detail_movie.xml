@@ -90,6 +90,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/toggle_favorite"
         app:layout_constraintEnd_toEndOf="@+id/poster"
         app:layout_constraintStart_toStartOf="@+id/poster"

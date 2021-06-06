@@ -1,5 +1,7 @@
 package com.dicoding.picodiploma.movietvshowapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -7,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.dicoding.picodiploma.movietvshowapp.databinding.ActivityMainBinding
-import com.dicoding.picodiploma.movietvshowapp.favorite.FavoriteMovieFragment
-import com.dicoding.picodiploma.movietvshowapp.favorite.FavoriteTvShowFragment
 import com.dicoding.picodiploma.movietvshowapp.movie.MovieFragment
 import com.dicoding.picodiploma.movietvshowapp.tvshow.TvShowFragment
 import com.google.android.material.navigation.NavigationView
@@ -56,13 +56,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragment = TvShowFragment()
                 title = getString(R.string.tv_show)
             }
-            R.id.nav_favorite_movie -> {
-                fragment = FavoriteMovieFragment()
-                title = getString(R.string.menu_favorite_movies)
-            }
-            R.id.nav_favorite_tv_show -> {
-                fragment = FavoriteTvShowFragment()
-                title = getString(R.string.menu_favorite_tv_show)
+            R.id.nav_favorite -> {
+                val uri = Uri.parse("movietvshowapp://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
             }
         }
         if (fragment != null) {

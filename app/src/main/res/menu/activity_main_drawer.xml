@@ -11,10 +11,7 @@
             android:id="@+id/nav_tv_show"
             android:title="@string/tv_show" />
         <item
-            android:id="@+id/nav_favorite_movie"
-            android:title="@string/menu_favorite_movies" />
-        <item
-            android:id="@+id/nav_favorite_tv_show"
-            android:title="@string/menu_favorite_tv_show" />
+            android:id="@+id/nav_favorite"
+            android:title="@string/menu_favorite" />
     </group>
 </menu>

@@ -23,4 +23,6 @@
     <string name="description">Description</string>
     <string name="synopsis">Synopsis</string>
     <string name="toggle_favorite">Toggle Favorite</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="menu_favorite">Favorite</string>
 </resources>

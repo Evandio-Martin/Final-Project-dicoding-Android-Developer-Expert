@@ -4,8 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity
-import com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.TvShowEntity
 import com.dicoding.picodiploma.movietvshowapp.core.domain.usecase.MovieUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -26,7 +24,11 @@ class FavoriteViewModelTest {
     @Mock
     private lateinit var useCase: MovieUseCase
 
-    private val viewModel by lazy { FavoriteViewModel(useCase) }
+    private val viewModel by lazy {
+        com.dicoding.picodiploma.movietvshowapp.favorite.FavoriteViewModel(
+            useCase
+        )
+    }
 
     @Mock
     private lateinit var observerMovie: Observer<PagedList<com.dicoding.picodiploma.movietshowapp.core.data.source.local.entity.MovieEntity>>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/favoriteMovieFragment"
+        android:enabled="true"
+        android:title="@string/menu_favorite_movies"/>
+    <item
+        android:id="@+id/favoriteTvShowFragment"
+        android:enabled="true"
+        android:title="@string/menu_favorite_tv_show"/>
+</menu>

@@ -8,22 +8,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.picodiploma.movietshowapp.core.ui.MovieAdapter
-import com.dicoding.picodiploma.movietvshowapp.databinding.FragmentFavoriteMovieBinding
-import com.dicoding.picodiploma.movietvshowapp.detail.DetailMovieActivity
+import com.dicoding.picodiploma.movietvshowapp.detail.DetailTvShowActivity
+import com.dicoding.picodiploma.movietvshowapp.favorite.databinding.FragmentFavoriteTvShowBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoriteMovieFragment : Fragment() {
+class FavoriteTvShowFragment : Fragment() {
 
-    private val favoriteMovieViewModel: FavoriteViewModel by viewModel()
+    private val favoriteTvShowViewModel: FavoriteViewModel by viewModel()
 
-    private var _binding: FragmentFavoriteMovieBinding? = null
+    private var _binding: FragmentFavoriteTvShowBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoriteMovieBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteTvShowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -32,23 +32,23 @@ class FavoriteMovieFragment : Fragment() {
 
         if (activity != null) {
 
-            val movieAdapter = MovieAdapter()
-            movieAdapter.onItemClick = { selectedData ->
-                val intent = Intent(activity, DetailMovieActivity::class.java)
-                intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
+            val tvShowAdapter = MovieAdapter()
+            tvShowAdapter.onItemClick = { selectedData ->
+                val intent = Intent(activity, DetailTvShowActivity::class.java)
+                intent.putExtra(DetailTvShowActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
 
-            favoriteMovieViewModel.favoriteMovie.observe(viewLifecycleOwner, { dataMovie ->
-                movieAdapter.setData(dataMovie)
+            favoriteTvShowViewModel.favoriteTvShow.observe(viewLifecycleOwner, { dataTvShow ->
+                tvShowAdapter.setData(dataTvShow)
                 binding.viewEmpty.root.visibility =
-                    if (dataMovie.isNotEmpty()) View.GONE else View.VISIBLE
+                    if (dataTvShow.isNotEmpty()) View.GONE else View.VISIBLE
             })
 
-            with(binding.rvFavoriteMovies) {
+            with(binding.rvFavoriteTvShows) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter = movieAdapter
+                adapter = tvShowAdapter
             }
         }
     }

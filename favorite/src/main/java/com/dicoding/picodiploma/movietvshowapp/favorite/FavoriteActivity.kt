@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding.picodiploma.movietvshowapp.favorite.databinding.ActivityFavoriteBinding
+import com.dicoding.picodiploma.movietvshowapp.favorite.di.favoriteModule
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.core.context.loadKoinModules

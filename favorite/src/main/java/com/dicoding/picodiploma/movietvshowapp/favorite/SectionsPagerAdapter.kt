@@ -3,8 +3,10 @@ package com.dicoding.picodiploma.movietvshowapp.favorite
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.dicoding.picodiploma.movietvshowapp.favorite.fragment.FavoriteMovieFragment
+import com.dicoding.picodiploma.movietvshowapp.favorite.fragment.FavoriteTvShowFragment
 
-class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity){
+class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
 
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null

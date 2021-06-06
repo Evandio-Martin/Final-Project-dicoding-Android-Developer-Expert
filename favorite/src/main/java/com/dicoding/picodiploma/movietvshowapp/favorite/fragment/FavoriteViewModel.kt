@@ -1,4 +1,4 @@
-package com.dicoding.picodiploma.movietvshowapp.favorite
+package com.dicoding.picodiploma.movietvshowapp.favorite.fragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

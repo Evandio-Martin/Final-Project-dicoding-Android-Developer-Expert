@@ -32,7 +32,7 @@ object DataMapper {
                 voteAverage = it.voteAverage,
                 releaseDate = it.releaseDate,
                 poster = it.poster,
-                isFavorite = false
+                isFavorite = it.isFavorite
             )
         }
 
@@ -71,7 +71,7 @@ object DataMapper {
                 voteAverage = it.voteAverage,
                 releaseDate = it.releaseDate,
                 poster = it.poster,
-                isFavorite = false
+                isFavorite = it.isFavorite
             )
         }
 

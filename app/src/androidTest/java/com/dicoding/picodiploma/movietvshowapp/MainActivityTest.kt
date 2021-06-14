@@ -11,7 +11,6 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.dicoding.movietvshowapp.MainActivity
 import org.junit.Rule
 import org.junit.Test
 
@@ -114,8 +113,8 @@ class MainActivityTest {
         Espresso.onView(withId(R.id.drawer_layout))
             .check(matches(isClosed(Gravity.LEFT)))
             .perform(DrawerActions.open())
-        Espresso.onView(withId(R.id.nav_favorite_movie)).perform(ViewActions.click())
-        Espresso.onView(withId(R.id.rv_favorite_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
+        Espresso.onView(withId(R.id.nav_favorite)).perform(ViewActions.click())
+        Espresso.onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
             ViewActions.click()
         ))
         Espresso.onView(withId(R.id.fab)).perform(ViewActions.click())
@@ -124,8 +123,8 @@ class MainActivityTest {
         Espresso.onView(withId(R.id.drawer_layout))
             .check(matches(isClosed(Gravity.LEFT)))
             .perform(DrawerActions.open())
-        Espresso.onView(withId(R.id.nav_favorite_tv_show)).perform(ViewActions.click())
-        Espresso.onView(withId(R.id.rv_favorite_tv_shows)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
+        Espresso.onView(withId(R.id.nav_favorite)).perform(ViewActions.click())
+        Espresso.onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
             ViewActions.click()
         ))
         Espresso.onView(withId(R.id.fab)).perform(ViewActions.click())
